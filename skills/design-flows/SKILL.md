@@ -11,7 +11,11 @@ Think in flows, not screens. Imagine the experience from start to finish. What i
 ## Pre-flight
 
 1. Read `.concinnitas/.active` to find the active track.
-2. If no active track exists, tell the user: "No active design track. Run `/design:track <name>` or `/design:discover` first."
+2. If no active track exists:
+   - Check how many track subdirectories exist in `.concinnitas/` (exclude `.active`).
+   - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'."
+   - If multiple tracks exist, ask the user: "Multiple tracks found. Run `/design:track <name>` to select one."
+   - If no tracks exist, tell the user: "No active design track. Run `/design:track <name>` or `/design:discover` first."
 3. Read `manifest.yaml` from the active track.
 4. **Check prerequisites:** `1-discover` must be `completed`. If not:
    - Tell the user: "Discovery (Phase 1) isn't complete yet. Run `/design:discover` first — we need to understand the problem before mapping flows."

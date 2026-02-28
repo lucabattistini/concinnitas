@@ -11,7 +11,11 @@ Still no colors. No brand vibes. Just hierarchy and logic. If this interface wer
 ## Pre-flight
 
 1. Read `.concinnitas/.active` to find the active track.
-2. If no active track: "No active design track. Run `/design:track <name>` or `/design:discover` first."
+2. If no active track:
+   - Check how many track subdirectories exist in `.concinnitas/` (exclude `.active`).
+   - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'."
+   - If multiple tracks exist: "Multiple tracks found. Run `/design:track <name>` to select one."
+   - If no tracks exist: "No active design track. Run `/design:track <name>` or `/design:discover` first."
 3. Read `manifest.yaml`.
 4. **Check prerequisites:** Both `1-discover` and `2-flows` must be `completed`. If not:
    - Tell the user which phases are missing and suggest running them first.

@@ -11,7 +11,11 @@ Without governance, entropy wins. Always. Define how changes happen. How tokens 
 ## Pre-flight
 
 1. Read `.concinnitas/.active` to find the active track.
-2. If no active track: "No active design track. Run `/design:track <name>` first."
+2. If no active track:
+   - Check how many track subdirectories exist in `.concinnitas/` (exclude `.active`).
+   - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'."
+   - If multiple tracks exist: "Multiple tracks found. Run `/design:track <name>` to select one."
+   - If no tracks exist: "No active design track. Run `/design:track <name>` first."
 3. Read `manifest.yaml`.
 4. **Check prerequisites:** At minimum, `4-system` must be `completed`. This phase defines governance for the design system — it needs a system to govern. Warn about missing phases but allow running if at least the system phase is done.
 5. If `7-govern` is `completed`:
