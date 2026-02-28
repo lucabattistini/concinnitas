@@ -12,10 +12,13 @@ Design begins with clarity. If you don't deeply understand the problem — the b
 
 1. Read `.concinnitas/.active` to find the active track name.
 2. If `.concinnitas/` doesn't exist OR no `.active` file exists:
-   - Ask the user: "No active design track. What should we call this design track?" Suggest `"main"` as the default.
-   - Create `.concinnitas/<track-name>/` directory.
-   - Create `manifest.yaml` with all phases set to `pending`.
-   - Write track name to `.concinnitas/.active`.
+   - First, check if `.concinnitas/` exists and contains track subdirectories.
+   - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'." Continue to step 3.
+   - If multiple tracks exist, ask the user: "Multiple tracks found. Run `/design:track <name>` to select one." Stop here.
+   - If no tracks exist, ask the user: "No active design track. What should we call this design track?" Suggest `"main"` as the default.
+     - Create `.concinnitas/<track-name>/` directory.
+     - Create `manifest.yaml` with all phases set to `pending`.
+     - Write track name to `.concinnitas/.active`.
 3. If `.concinnitas/.active` exists, read it and verify the track directory exists.
 4. Read `manifest.yaml` from the active track.
 5. If `1-discover` status is `completed`:

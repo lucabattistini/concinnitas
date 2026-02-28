@@ -24,7 +24,10 @@ Manage design process tracks within the `.concinnitas/` directory. Each track is
    - Stop here.
 3. If it exists, list all subdirectories (excluding `.active`)
 4. Read `.concinnitas/.active` to find the current active track
-5. Display tracks in a table:
+5. If no `.active` file exists or it points to a non-existent track:
+   - If exactly one track exists, auto-select it (write its name to `.concinnitas/.active`). It is always active regardless of the `.active` file.
+   - If multiple tracks exist, note that no track is active and suggest running `/design:track <name>`.
+6. Display tracks in a table:
 
 ```
 Design Tracks:
