@@ -1,0 +1,37 @@
+{
+  "name": "@lucabattistini/concinnitas",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "AI-guided 7-phase design process for OpenCode",
+  "bin": {
+    "concinnitas": "./dist/cli.js"
+  },
+  "files": [
+    "dist/",
+    "skills/"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "^25.3.2",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "opencode",
+    "design",
+    "design-system",
+    "ai",
+    "skills"
+  ],
+  "author": "Luca Battistini",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucabattistini/concinnitas.git"
+  }
+}
