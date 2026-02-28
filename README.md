@@ -37,6 +37,14 @@ If Paper MCP is unavailable, everything works in text-only mode.
 
 ## Install
 
+First, configure npm/pnpm to use GitHub Packages for the `@lucabattistini` scope:
+
+```sh
+echo "@lucabattistini:registry=https://npm.pkg.github.com" >> ~/.npmrc
+```
+
+Then install:
+
 ```sh
 npx @lucabattistini/concinnitas install
 ```
