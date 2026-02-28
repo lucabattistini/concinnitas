@@ -1,0 +1,5 @@
+# OS
+.DS_Store
+
+# Concinnitas runtime artifacts (created per-project, not in this repo)
+.concinnitas/
