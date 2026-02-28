@@ -148,7 +148,7 @@ Read these artifacts:
 
 ## Visual Output — Paper.design
 
-**Check for Paper MCP availability.**
+**Check for Paper MCP availability** by attempting to call `get_basic_info`. If it responds, Paper is available.
 
 ### If Paper MCP is available:
 
@@ -156,11 +156,13 @@ This is the richest visual output phase. Transform the grayscale wireframes from
 
 1. **Read structure artboards:** Call `get_children` on the root to find the "Structure — [View]" artboards from Phase 3. For each, call `get_jsx` to get the structural HTML.
 
-2. **Create expression artboards:** For each structured view, call `create_artboard`:
+2. **Find placement:** Call `find_placement` before each artboard to get coordinates that avoid overlapping existing artboards.
+
+3. **Create expression artboards:** For each structured view, call `create_artboard`:
    - Name: `"Expression — [View Name]"`
    - Same dimensions as the structure artboard
 
-3. **Write branded HTML:** Call `write_html` with the structural HTML transformed to use the design system:
+4. **Write branded HTML:** Call `write_html` with the structural HTML transformed to use the design system:
    - Replace grayscale colors with semantic token values as CSS custom properties
    - Apply the chosen typefaces via `font-family`
    - Apply the spacing scale tokens
@@ -169,12 +171,12 @@ This is the richest visual output phase. Transform the grayscale wireframes from
    - Use the real brand colors, not the grayscale palette
    - Include hover states and interactive styling via CSS
 
-4. **Refine styling:** Call `update_styles` to fine-tune after the initial write:
+5. **Refine styling:** Call `update_styles` to fine-tune after the initial write:
    - Adjust spacing that doesn't feel right
    - Ensure text is legible at all sizes
    - Verify color contrast in context
 
-5. **Show progress:** Use `start_working_on_nodes` / `finish_working_on_nodes`.
+6. **Show progress:** Use `start_working_on_nodes` before creating artboards, `finish_working_on_nodes` after all are written.
 
 **Quality bar:** The output should look like a designed product, not a wireframe with colors. The layout accuracy comes from Phase 3's structure. The visual refinement comes from the token system. Together, they produce something that represents the design intent — though manual polish in Paper may be needed for production-readiness.
 
