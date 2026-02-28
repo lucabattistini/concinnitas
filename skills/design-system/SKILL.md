@@ -214,27 +214,33 @@ Does this convention work, or do you prefer a different pattern?"
 
 ## Visual Output — Paper.design
 
-**Check for Paper MCP availability.**
+**Check for Paper MCP availability** by attempting to call `get_basic_info`. If it responds, Paper is available.
 
 ### If Paper MCP is available:
 
 Create a design tokens reference sheet:
 
-1. **Spacing artboard:** Call `create_artboard` ("Tokens — Spacing"). Use `write_html` to render boxes at each spacing value, labeled with token name and pixel value. Visual representation of the scale.
+1. **Find placement:** Call `find_placement` before each artboard to get coordinates that avoid overlapping existing artboards.
 
-2. **Typography artboard:** Call `create_artboard` ("Tokens — Typography"). Render each text size as a specimen line:
+2. **Show progress:** Call `start_working_on_nodes` before creating artboards.
+
+3. **Spacing artboard:** Call `create_artboard` ("Tokens — Spacing"). Use `write_html` to render boxes at each spacing value, labeled with token name and pixel value. Visual representation of the scale.
+
+4. **Typography artboard:** Call `find_placement`, then `create_artboard` ("Tokens — Typography"). Render each text size as a specimen line:
    ```
    text-xs (12px/1.5) — The quick brown fox jumps over the lazy dog
    text-sm (14px/1.5) — The quick brown fox jumps over the lazy dog
    ...
    ```
 
-3. **Color artboard:** Call `create_artboard` ("Tokens — Color"). Render:
+5. **Color artboard:** Call `find_placement`, then `create_artboard` ("Tokens — Color"). Render:
    - Hue ramps as horizontal strips of colored squares
    - Semantic token pairs (light + dark value) with labels
    - Contrast ratio indicators (checkmarks for passing, X for failing)
 
-4. **Use actual CSS custom properties** in the HTML so the token values are embedded in the design file.
+6. **Use actual CSS custom properties** in the HTML so the token values are embedded in the design file.
+
+7. **Finish progress:** Call `finish_working_on_nodes` after all artboards are written.
 
 ### If Paper MCP is not available:
 
