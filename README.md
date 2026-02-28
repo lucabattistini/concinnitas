@@ -37,6 +37,26 @@ If Paper MCP is unavailable, everything works in text-only mode.
 
 ## Install
 
+```sh
+npx @lucabattistini/concinnitas install
+```
+
+Restart OpenCode. The `/design:*` commands appear in your skill list.
+
+### Update
+
+```sh
+npx @lucabattistini/concinnitas update
+```
+
+### Uninstall
+
+```sh
+npx @lucabattistini/concinnitas uninstall
+```
+
+### Manual install (alternative)
+
 Clone and symlink the skills into your OpenCode config:
 
 ```sh
@@ -47,8 +67,6 @@ for skill in skills/design-*; do
   ln -s "$(pwd)/$skill" ~/.config/opencode/skills/$(basename "$skill")
 done
 ```
-
-Restart OpenCode. The `/design:*` commands will appear in your skill list.
 
 ## Project Structure
 
@@ -71,5 +89,7 @@ Runtime artifacts are created per-project in `.concinnitas/` (gitignored).
 
 ## Requirements
 
+- [Node.js](https://nodejs.org) 18+ (for npx installer)
 - [OpenCode](https://opencode.ai)
 - [Paper.design](https://paper.design) MCP server (optional, for visual output)
+- macOS or Linux (Windows is not supported)
