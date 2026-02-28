@@ -1,6 +1,6 @@
 import { createRequire } from "node:module";
 const require = createRequire(import.meta.url);
-const pkg = require("../../package.json") as { version: string };
+const pkg = require("../package.json") as { version: string };
 
 export const SKILL_NAMES = [
   "design-track",
