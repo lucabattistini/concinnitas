@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { getOpenCodeConfigDir } from "./paths.js";
+import { getConfigDir } from "./paths.js";
+import type { Platform } from "../constants.js";
 
 export interface VerifyResult {
   valid: string[];
@@ -50,8 +51,8 @@ export function verifyInstallation(
 }
 
 /**
- * Check if the OpenCode config directory exists.
+ * Check if the config directory for a given platform exists.
  */
-export function checkOpenCodeExists(): boolean {
-  return existsSync(getOpenCodeConfigDir());
+export function checkPlatformExists(platform: Platform): boolean {
+  return existsSync(getConfigDir(platform));
 }

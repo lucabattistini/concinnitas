@@ -3,6 +3,20 @@ const require = createRequire(import.meta.url);
 const pkg = require("../package.json") as { version: string };
 
 export const SKILL_NAMES = [
+  "track",
+  "discover",
+  "flows",
+  "structure",
+  "system",
+  "expression",
+  "validate",
+  "govern",
+] as const;
+
+export type SkillName = (typeof SKILL_NAMES)[number];
+
+/** Legacy skill names from v1.x for upgrade cleanup (R7). */
+export const LEGACY_SKILL_NAMES = [
   "design-track",
   "design-discover",
   "design-flows",
@@ -13,7 +27,7 @@ export const SKILL_NAMES = [
   "design-govern",
 ] as const;
 
-export type SkillName = (typeof SKILL_NAMES)[number];
+export type Platform = "opencode" | "claude";
 
 /**
  * Package version. Updated manually to match package.json.

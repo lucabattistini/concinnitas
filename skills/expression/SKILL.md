@@ -1,6 +1,6 @@
 ---
-name: design-expression
-description: Phase 5 of the concinnitas design process — apply brand expression, visual identity, typography, color, and motion to the structural foundation using design tokens. Produces branded design specifications and visual designs in Paper.design. Use when running /design:expression after the system is defined.
+name: expression
+description: Phase 5 of the concinnitas design process — apply brand expression, visual identity, typography, color, and motion to the structural foundation using design tokens. Produces branded design specifications and visual designs in Paper.design. Use when running /con:expression after the system is defined.
 disable-model-invocation: true
 ---
 
@@ -14,12 +14,12 @@ Now color feels intentional because it's tied to tokens. Typography feels cohesi
 2. If no active track:
    - Check how many track subdirectories exist in `.concinnitas/` (exclude `.active`).
    - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'."
-   - If multiple tracks exist: "Multiple tracks found. Run `/design:track <name>` to select one."
-   - If no tracks exist: "No active design track. Run `/design:track <name>` first."
+   - If multiple tracks exist: "Multiple tracks found. Run `/con:track <name>` to select one."
+   - If no tracks exist: "No active design track. Run `/con:track <name>` first."
 3. Read `manifest.yaml`.
 4. **Check prerequisites:** `1-discover` and `3-structure` and `4-system` must be `completed`.
-   - If `3-structure` is missing: "Structure (Phase 3) is required. Run `/design:structure` first."
-   - If `4-system` is missing: "Design system (Phase 4) is required. Run `/design:system` first."
+   - If `3-structure` is missing: "Structure (Phase 3) is required. Run `/con:structure` first."
+   - If `4-system` is missing: "Design system (Phase 4) is required. Run `/con:system` first."
    - Note: Phase 5 can run without Phase 2 (flows), though the AI should note the gap.
 5. If `5-expression` is `completed`:
    - Inform user, show summary.
@@ -194,4 +194,4 @@ Note: "Visual designs were not generated (Paper.design not connected). The expre
    - Set `5-expression.status` to `completed`
    - Set `5-expression.completed_at` to current ISO timestamp
    - Set `current_phase` to `6`
-2. Tell the user: "Brand expression applied. Run `/design:validate` to check the design against reality."
+2. Tell the user: "Brand expression applied. Run `/con:validate` to check the design against reality."

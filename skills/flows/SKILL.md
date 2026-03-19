@@ -1,6 +1,6 @@
 ---
-name: design-flows
-description: Phase 2 of the concinnitas design process — map user journeys, edge cases, and failure states. Produces flow documentation covering happy paths, error states, branching paths, and friction points. Use when running /design:flows after discovery is complete.
+name: flows
+description: Phase 2 of the concinnitas design process — map user journeys, edge cases, and failure states. Produces flow documentation covering happy paths, error states, branching paths, and friction points. Use when running /con:flows after discovery is complete.
 disable-model-invocation: true
 ---
 
@@ -14,11 +14,11 @@ Think in flows, not screens. Imagine the experience from start to finish. What i
 2. If no active track exists:
    - Check how many track subdirectories exist in `.concinnitas/` (exclude `.active`).
    - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'."
-   - If multiple tracks exist, ask the user: "Multiple tracks found. Run `/design:track <name>` to select one."
-   - If no tracks exist, tell the user: "No active design track. Run `/design:track <name>` or `/design:discover` first."
+   - If multiple tracks exist, ask the user: "Multiple tracks found. Run `/con:track <name>` to select one."
+   - If no tracks exist, tell the user: "No active design track. Run `/con:track <name>` or `/con:discover` first."
 3. Read `manifest.yaml` from the active track.
 4. **Check prerequisites:** `1-discover` must be `completed`. If not:
-   - Tell the user: "Discovery (Phase 1) isn't complete yet. Run `/design:discover` first — we need to understand the problem before mapping flows."
+   - Tell the user: "Discovery (Phase 1) isn't complete yet. Run `/con:discover` first — we need to understand the problem before mapping flows."
    - Stop here.
 5. If `2-flows` status is `completed`:
    - Tell the user: "Flow mapping is already complete for this track."
@@ -141,4 +141,4 @@ N. **[Success state]** — [What success looks and feels like]
    - Set `2-flows.status` to `completed`
    - Set `2-flows.completed_at` to current ISO timestamp
    - Set `current_phase` to `3`
-2. Tell the user: "Flows mapped. Run `/design:structure` to design the information hierarchy and layout logic."
+2. Tell the user: "Flows mapped. Run `/con:structure` to design the information hierarchy and layout logic."

@@ -1,6 +1,6 @@
 ---
-name: design-system
-description: Phase 4 of the concinnitas design process — define design primitives, tokens, spacing scales, typography, color logic, and semantic naming. Produces a complete design token specification. Use when running /design:system after structure is designed.
+name: system
+description: Phase 4 of the concinnitas design process — define design primitives, tokens, spacing scales, typography, color logic, and semantic naming. Produces a complete design token specification. Use when running /con:system after structure is designed.
 disable-model-invocation: true
 ---
 
@@ -16,8 +16,8 @@ From those primitives, create meaning. Background colors aren't just blue or gra
 2. If no active track:
    - Check how many track subdirectories exist in `.concinnitas/` (exclude `.active`).
    - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'."
-   - If multiple tracks exist: "Multiple tracks found. Run `/design:track <name>` to select one."
-   - If no tracks exist: "No active design track. Run `/design:track <name>` first."
+   - If multiple tracks exist: "Multiple tracks found. Run `/con:track <name>` to select one."
+   - If no tracks exist: "No active design track. Run `/con:track <name>` first."
 3. Read `manifest.yaml`.
 4. **Check prerequisites:** Phases 1-3 (`1-discover`, `2-flows`, `3-structure`) must be `completed`. If any are missing:
    - Tell the user which phases are incomplete.
@@ -256,4 +256,4 @@ Note: "Token reference sheets were not generated visually (Paper.design not conn
    - Set `4-system.status` to `completed`
    - Set `4-system.completed_at` to current ISO timestamp
    - Set `current_phase` to `5`
-2. Tell the user: "Design system primitives defined. Run `/design:expression` to apply brand and visual identity."
+2. Tell the user: "Design system primitives defined. Run `/con:expression` to apply brand and visual identity."

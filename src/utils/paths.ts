@@ -1,24 +1,34 @@
 import { homedir } from "node:os";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import type { Platform } from "../constants.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 /**
- * Resolve the OpenCode skills target directory.
- * Respects $XDG_CONFIG_HOME on Linux, falls back to ~/.config.
+ * Resolve the skills target directory for the given platform.
+ * Only OpenCode uses a target directory — Claude Code serves skills
+ * directly from the npm package via plugin.json.
  */
-export function getSkillsTargetDir(): string {
-  const configHome = process.env["XDG_CONFIG_HOME"] || resolve(homedir(), ".config");
-  return resolve(configHome, "opencode", "skills");
+export function getSkillsTargetDir(platform: Platform): string {
+  if (platform === "opencode") {
+    const configHome = process.env["XDG_CONFIG_HOME"] || resolve(homedir(), ".config");
+    return resolve(configHome, "opencode", "skills");
+  }
+  throw new Error("Claude Code skills are served from the npm package directly");
 }
 
 /**
- * Resolve the OpenCode config directory (parent of skills/).
+ * Resolve the platform config directory.
+ * OpenCode: ~/.config/opencode/
+ * Claude Code: ~/.claude/
  */
-export function getOpenCodeConfigDir(): string {
-  const configHome = process.env["XDG_CONFIG_HOME"] || resolve(homedir(), ".config");
-  return resolve(configHome, "opencode");
+export function getConfigDir(platform: Platform): string {
+  if (platform === "opencode") {
+    const configHome = process.env["XDG_CONFIG_HOME"] || resolve(homedir(), ".config");
+    return resolve(configHome, "opencode");
+  }
+  return resolve(homedir(), ".claude");
 }
 
 /**
@@ -30,9 +40,17 @@ export function getBundledSkillsDir(): string {
 }
 
 /**
- * Path to .concinnitas-meta.json — stored in the OpenCode config dir,
+ * Path to .concinnitas-meta.json for OpenCode — stored in the OpenCode config dir,
  * not inside skills/, to avoid OpenCode trying to load it as a skill.
  */
 export function getMetaFilePath(): string {
-  return resolve(getOpenCodeConfigDir(), ".concinnitas-meta.json");
+  return resolve(getConfigDir("opencode"), ".concinnitas-meta.json");
+}
+
+/**
+ * Get the installed skill directory name for OpenCode from a source skill name.
+ * Source "discover" → installed "con-discover".
+ */
+export function getInstalledSkillName(sourceName: string): string {
+  return `con-${sourceName}`;
 }
