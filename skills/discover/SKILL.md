@@ -1,6 +1,6 @@
 ---
-name: design-discover
-description: Phase 1 of the concinnitas design process — deeply understand the problem through guided conversation. Produces a discovery brief covering business context, user pain, constraints, and success criteria. Use when starting a new design process or running /design:discover.
+name: discover
+description: Phase 1 of the concinnitas design process — deeply understand the problem through guided conversation. Produces a discovery brief covering business context, user pain, constraints, and success criteria. Use when starting a new design process or running /con:discover.
 disable-model-invocation: true
 ---
 
@@ -14,7 +14,7 @@ Design begins with clarity. If you don't deeply understand the problem — the b
 2. If `.concinnitas/` doesn't exist OR no `.active` file exists:
    - First, check if `.concinnitas/` exists and contains track subdirectories.
    - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'." Continue to step 3.
-   - If multiple tracks exist, ask the user: "Multiple tracks found. Run `/design:track <name>` to select one." Stop here.
+   - If multiple tracks exist, ask the user: "Multiple tracks found. Run `/con:track <name>` to select one." Stop here.
    - If no tracks exist, ask the user: "No active design track. What should we call this design track?" Suggest `"main"` as the default.
      - Create `.concinnitas/<track-name>/` directory.
      - Create `manifest.yaml` with all phases set to `pending`.
@@ -25,7 +25,7 @@ Design begins with clarity. If you don't deeply understand the problem — the b
    - Tell the user: "Discovery is already complete for this track."
    - Read and display a summary of `01-discover.md`.
    - Offer two options:
-     - **Proceed to flows (recommended):** "Run `/design:flows` to map user journeys."
+     - **Proceed to flows (recommended):** "Run `/con:flows` to map user journeys."
      - **Review discovery brief:** "I can review the discovery brief for gaps, inconsistencies, or unstated assumptions."
    - If user chooses review: read `01-discover.md`, analyze it critically, suggest improvements. Do NOT overwrite — present suggestions for the user to accept/reject.
    - Stop here.
@@ -126,4 +126,4 @@ Once all questions are answered:
    - Set `1-discover.status` to `completed`
    - Set `1-discover.completed_at` to current ISO timestamp
    - Set `current_phase` to `2`
-2. Tell the user: "Discovery complete. Run `/design:flows` to map user journeys and edge cases."
+2. Tell the user: "Discovery complete. Run `/con:flows` to map user journeys and edge cases."

@@ -1,12 +1,20 @@
 import { existsSync, readFileSync } from "node:fs";
-import { getSkillsTargetDir, getMetaFilePath } from "../utils/paths.js";
+import { getSkillsTargetDir, getMetaFilePath, getInstalledSkillName } from "../utils/paths.js";
 import { verifyInstallation } from "../utils/verify.js";
 import { info, heading, SYM_OK, SYM_FAIL } from "../utils/output.js";
-import { SKILL_NAMES } from "../constants.js";
-import type { MetaFile } from "../constants.js";
+import { SKILL_NAMES, PACKAGE_VERSION } from "../constants.js";
+import type { Platform, MetaFile } from "../constants.js";
 
-export function list(): void {
-  const targetDir = getSkillsTargetDir();
+export function list(platform: Platform): void {
+  if (platform === "claude") {
+    listClaude();
+  } else {
+    listOpenCode();
+  }
+}
+
+function listOpenCode(): void {
+  const targetDir = getSkillsTargetDir("opencode");
   const metaPath = getMetaFilePath();
 
   // Read meta info
@@ -22,19 +30,20 @@ export function list(): void {
     }
   }
 
-  heading(`Concinnitas Skills${versionInfo}`);
+  heading(`Concinnitas Skills — OpenCode${versionInfo}`);
 
-  // Verify installation
-  const result = verifyInstallation(targetDir, SKILL_NAMES);
+  // Verify installation using installed names (con-*)
+  const installedNames = SKILL_NAMES.map(getInstalledSkillName);
+  const result = verifyInstallation(targetDir, installedNames);
   const installedSet = new Set([...result.valid, ...result.invalid]);
 
   // Print table
-  const nameWidth = Math.max(...SKILL_NAMES.map((n) => n.length)) + 2;
+  const nameWidth = Math.max(...installedNames.map((n) => n.length)) + 2;
 
   info(`${"Skill".padEnd(nameWidth)}Status`);
   info(`${"\u2500".repeat(nameWidth)}${"\u2500".repeat(16)}`);
 
-  for (const name of SKILL_NAMES) {
+  for (const name of installedNames) {
     const status = installedSet.has(name)
       ? `${SYM_OK} installed`
       : `${SYM_FAIL} missing`;
@@ -45,4 +54,18 @@ export function list(): void {
   const installed = installedSet.size;
   console.log("");
   info(`${installed}/${SKILL_NAMES.length} skills installed.`);
+}
+
+function listClaude(): void {
+  heading("Concinnitas Skills — Claude Code");
+
+  info(`Package version: v${PACKAGE_VERSION}`);
+  info("");
+  info("Claude Code skills are served directly from the npm package.");
+  info("If the plugin is registered, these commands are available:");
+  info("");
+
+  for (const name of SKILL_NAMES) {
+    info(`  /con:${name}`);
+  }
 }

@@ -7,7 +7,7 @@ import {
 } from "node:fs";
 import { join } from "node:path";
 import { tmpdir } from "node:os";
-import { verifyInstallation, checkOpenCodeExists } from "./verify.js";
+import { verifyInstallation, checkPlatformExists } from "./verify.js";
 
 const VALID_SKILL_MD = `---
 name: test-skill
@@ -119,7 +119,7 @@ describe("verify", () => {
     });
   });
 
-  describe("checkOpenCodeExists", () => {
+  describe("checkPlatformExists", () => {
     let originalXdg: string | undefined;
 
     beforeEach(() => {
@@ -139,13 +139,13 @@ describe("verify", () => {
       mkdirSync(join(configHome, "opencode"), { recursive: true });
       process.env["XDG_CONFIG_HOME"] = configHome;
 
-      expect(checkOpenCodeExists()).toBe(true);
+      expect(checkPlatformExists("opencode")).toBe(true);
     });
 
     it("returns false when opencode config dir does not exist", () => {
       process.env["XDG_CONFIG_HOME"] = join(tempDir, "nonexistent-config");
 
-      expect(checkOpenCodeExists()).toBe(false);
+      expect(checkPlatformExists("opencode")).toBe(false);
     });
   });
 });

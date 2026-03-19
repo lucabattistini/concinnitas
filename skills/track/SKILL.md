@@ -1,6 +1,6 @@
 ---
-name: design-track
-description: Manage concinnitas design tracks — create, switch, and list design process tracks. Use when running /design:track, managing multiple design processes in one project, or switching between design tracks.
+name: track
+description: Manage concinnitas design tracks — create, switch, and list design process tracks. Use when running /con:track, managing multiple design processes in one project, or switching between design tracks.
 disable-model-invocation: true
 argument-hint: [track-name]
 ---
@@ -20,13 +20,13 @@ Manage design process tracks within the `.concinnitas/` directory. Each track is
 
 1. Check if `.concinnitas/` directory exists
 2. If it doesn't exist:
-   - Tell the user: "No design tracks found. Run `/design:track <name>` to create one, or `/design:discover` to start a new design process."
+   - Tell the user: "No design tracks found. Run `/con:track <name>` to create one, or `/con:discover` to start a new design process."
    - Stop here.
 3. If it exists, list all subdirectories (excluding `.active`)
 4. Read `.concinnitas/.active` to find the current active track
 5. If no `.active` file exists or it points to a non-existent track:
    - If exactly one track exists, auto-select it (write its name to `.concinnitas/.active`). It is always active regardless of the `.active` file.
-   - If multiple tracks exist, note that no track is active and suggest running `/design:track <name>`.
+   - If multiple tracks exist, note that no track is active and suggest running `/con:track <name>`.
 6. Display tracks in a table:
 
 ```
@@ -78,4 +78,4 @@ phases:
     status: pending
 ```
 
-   - Display: "Created track '<track-name>'. Run `/design:discover` to begin the design process."
+   - Display: "Created track '<track-name>'. Run `/con:discover` to begin the design process."

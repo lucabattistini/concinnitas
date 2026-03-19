@@ -1,6 +1,6 @@
 ---
-name: design-validate
-description: Phase 6 of the concinnitas design process — validate the design against the original problem, accessibility standards, flow coverage, and engineering feasibility. Produces a validation report. Use when running /design:validate after expression is applied.
+name: validate
+description: Phase 6 of the concinnitas design process — validate the design against the original problem, accessibility standards, flow coverage, and engineering feasibility. Produces a validation report. Use when running /con:validate after expression is applied.
 disable-model-invocation: true
 ---
 
@@ -14,8 +14,8 @@ After release, the process doesn't end. Watch behavior. Look at drop-offs. Liste
 2. If no active track:
    - Check how many track subdirectories exist in `.concinnitas/` (exclude `.active`).
    - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'."
-   - If multiple tracks exist: "Multiple tracks found. Run `/design:track <name>` to select one."
-   - If no tracks exist: "No active design track. Run `/design:track <name>` first."
+   - If multiple tracks exist: "Multiple tracks found. Run `/con:track <name>` to select one."
+   - If no tracks exist: "No active design track. Run `/con:track <name>` first."
 3. Read `manifest.yaml`.
 4. **Check prerequisites:** At minimum, `1-discover` and `3-structure` must be `completed`. This phase is most useful when all 5 previous phases are done. Warn about any missing phases but don't block.
 5. If `6-validate` is `completed`:
@@ -151,4 +151,4 @@ If `02-flows.md` exists:
    - Set `6-validate.status` to `completed`
    - Set `6-validate.completed_at` to current ISO timestamp
    - Set `current_phase` to `7`
-2. Tell the user: "Validation complete. Run `/design:govern` to define how the design system is maintained and evolved."
+2. Tell the user: "Validation complete. Run `/con:govern` to define how the design system is maintained and evolved."

@@ -1,6 +1,6 @@
 ---
-name: design-structure
-description: Phase 3 of the concinnitas design process — design information hierarchy, layout logic, and interaction patterns. Produces structural specifications and optional grayscale wireframes in Paper.design. Use when running /design:structure after flows are mapped.
+name: structure
+description: Phase 3 of the concinnitas design process — design information hierarchy, layout logic, and interaction patterns. Produces structural specifications and optional grayscale wireframes in Paper.design. Use when running /con:structure after flows are mapped.
 disable-model-invocation: true
 ---
 
@@ -14,8 +14,8 @@ Still no colors. No brand vibes. Just hierarchy and logic. If this interface wer
 2. If no active track:
    - Check how many track subdirectories exist in `.concinnitas/` (exclude `.active`).
    - If exactly one track exists, auto-select it as the active track (write its name to `.concinnitas/.active`). Inform the user: "Auto-selected track '[name]'."
-   - If multiple tracks exist: "Multiple tracks found. Run `/design:track <name>` to select one."
-   - If no tracks exist: "No active design track. Run `/design:track <name>` or `/design:discover` first."
+   - If multiple tracks exist: "Multiple tracks found. Run `/con:track <name>` to select one."
+   - If no tracks exist: "No active design track. Run `/con:track <name>` or `/con:discover` first."
 3. Read `manifest.yaml`.
 4. **Check prerequisites:** Both `1-discover` and `2-flows` must be `completed`. If not:
    - Tell the user which phases are missing and suggest running them first.
@@ -173,4 +173,4 @@ Note in the output: "Visual wireframes were not generated (Paper.design not conn
    - Set `3-structure.completed_at` to current ISO timestamp
    - Set `current_phase` to `4`
    - Set `visual_target` to `paper` if Paper MCP was used, `none` if not
-2. Tell the user: "Structure defined. Run `/design:system` to define design primitives and tokens."
+2. Tell the user: "Structure defined. Run `/con:system` to define design primitives and tokens."

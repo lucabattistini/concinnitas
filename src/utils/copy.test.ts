@@ -22,10 +22,10 @@ description: A test skill
 This is a test skill.
 `;
 
-function createSkillFixture(dir: string, name: string): void {
+function createSkillFixture(dir: string, name: string, content?: string): void {
   const skillDir = join(dir, name);
   mkdirSync(skillDir, { recursive: true });
-  writeFileSync(join(skillDir, "SKILL.md"), VALID_SKILL_MD);
+  writeFileSync(join(skillDir, "SKILL.md"), content ?? VALID_SKILL_MD);
 }
 
 describe("copy", () => {
@@ -143,6 +143,49 @@ describe("copy", () => {
       expect(() => {
         atomicCopySkills(sourceDir, targetDir, ["skill-a"]);
       }).toThrow("SKILL.md missing in staged skill");
+    });
+
+    it("supports directory rename via SkillNameMapping", () => {
+      createSkillFixture(sourceDir, "discover");
+
+      atomicCopySkills(sourceDir, targetDir, [
+        { source: "discover", target: "con-discover" },
+      ]);
+
+      expect(existsSync(join(targetDir, "con-discover", "SKILL.md"))).toBe(true);
+      expect(existsSync(join(targetDir, "discover"))).toBe(false);
+    });
+
+    it("applies transform function to SKILL.md during copy", () => {
+      const skillContent = `---
+name: discover
+description: A test skill
+---
+
+# Discover
+
+Run /con:flows next.
+`;
+      createSkillFixture(sourceDir, "discover", skillContent);
+
+      const transform = (content: string, sourceName: string): string => {
+        return content.replace(/^(name:\s*)(.+)$/m, `$1con-${sourceName}`);
+      };
+
+      atomicCopySkills(
+        sourceDir,
+        targetDir,
+        [{ source: "discover", target: "con-discover" }],
+        transform,
+      );
+
+      const result = readFileSync(
+        join(targetDir, "con-discover", "SKILL.md"),
+        "utf-8",
+      );
+      expect(result).toContain("name: con-discover");
+      // Body content should be unchanged
+      expect(result).toContain("Run /con:flows next.");
     });
   });
 
